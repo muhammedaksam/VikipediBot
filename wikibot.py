@@ -148,7 +148,7 @@ def check_and_send(comment):
                 i = i[i.rfind('.') + 1:]
 
             # Checking pattern 1: What does X mean?
-            if 'nedir' in i:
+            if ' nedir' in i:
                 print('pattern1')
 
                 # Slicing the sentence so only the question remains
