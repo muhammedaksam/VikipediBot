@@ -2,6 +2,7 @@ import prawcore
 import sentences as s
 import text_funcs as tf
 import excluding_words as ew
+import os
 from mediawikiapi import MediaWikiAPI, MediaWikiAPIException as Exc, PageError
 from praw import Reddit, exceptions
 from tenacity import retry, wait_chain, wait_fixed
