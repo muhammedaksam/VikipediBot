@@ -4,6 +4,7 @@ import text_funcs as tf
 import excluding_words as ew
 import os
 from mediawikiapi import MediaWikiAPI, MediaWikiAPIException as Exc, PageError
+from mediawikiapi import config
 from praw import Reddit, exceptions
 from tenacity import retry, wait_chain, wait_fixed
 from os import environ
@@ -12,6 +13,7 @@ client_id = os.environ['REDDIT_CLIENT_ID']
 secret = os.environ['REDDIT_SECRET']
 password = os.environ['REDDIT_PW']
 username = os.environ['BOT_USERNAME']
+mediawiki_language = os.environ['MEDIAWIKI_LANGUAGE']
 
 # These all are fake except for the username
 reddit = Reddit(client_id=client_id,
@@ -146,11 +148,11 @@ def check_and_send(comment):
                 i = i[i.rfind('.') + 1:]
 
             # Checking pattern 1: What does X mean?
-            if 'what does ' in i and ' mean' in i:
+            if 'nedir' in i:
                 print('pattern1')
 
                 # Slicing the sentence so only the question remains
-                i = i[i.index('what does '):]
+                i = i[i.index(' nedir'):]
 
                 # Removing everything except for the word to search for
                 i = tf.remove_all(i, ew.to_replace1)
@@ -158,7 +160,7 @@ def check_and_send(comment):
 
             # Resetting valid_question's value to check the second pattern
             else:
-                verb = ('who\'s ' in i or 'who is ' in i) and 'ing ' in i
+                verb = (' kim' in i or ' kimdir' in i) and ('ar?' or 'er?' or 'ır?' or 'ir?' or 'ur?' or 'ür?' or 'or?' or 'ör?') in i
                 valid_pattern = tf.pattern2(i)
 
                 # Checking pattern 2: What/who is/are X?
@@ -202,4 +204,5 @@ def main():
 
 if __name__ == '__main__':
     mwa = MediaWikiAPI()  # Creating a wikipedia API variable
+    mwa.config.language = mediawiki_language
     main()

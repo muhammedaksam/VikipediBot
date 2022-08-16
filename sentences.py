@@ -1,7 +1,7 @@
 from datetime import datetime
 
 # Reddit markdown is used in this string
-comment_reply = f"\n\n\n\n*Bu yorum otomatik olarak bırakıldı (bir bot tarafından)." \
+comment_reply = f"\n\n\n\n*Bu yorum (bir bot tarafından) otomatik olarak bırakıldı." \
                 f" Bunu doğru anlamadıysam, bana kızmayın, hala öğreniyorum!*\n\n" \
                 f"[^(listeden çık)](https://www.reddit.com/r/VikipediBot/comments/wpslrb/listeden_%C3%A7%C4%B1kma_ba%C5%9Fl%C4%B1%C4%9F%C4%B1/)" \
                 f" ^(|) [^(öneri/şikayet)](https://www.reddit.com/r/VikipediBot)" \
