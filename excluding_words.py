@@ -3,13 +3,13 @@
 # should be ignored because the bot can't answer the right
 
 # Excluding words for the first pattern
-excluding_words1 = {}
+excluding_words1 = {'‘'}
 
 # Fuck NLTK, all my homies use self-made adjectives set
-adjectives = {}
+adjectives = {" iyi ", " kötü"}
 
 # Excluding words for the second pattern
-excluding_words2 = {}.union(adjectives)
+excluding_words2 = {" anlam ", " kim ", " ne "}.union(adjectives)
 
 quotes = ('"', "“")
 
