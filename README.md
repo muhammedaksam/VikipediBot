@@ -1,12 +1,12 @@
 <div>
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]() [![GitHub Issues](https://img.shields.io/github/issues/TheBugYouCantFix/wiki-reddit-bot)](https://github.com/TheBugYouCantFix) ![Lines of code](https://img.shields.io/tokei/lines/github/TheBugYouCantFix/wiki-reddit-bot)
+[![Status](https://img.shields.io/badge/status-active-success.svg)]() [![GitHub Issues](https://img.shields.io/github/issues/muhammedaksam/VikipediBot)](https://github.com/TheBugYouCantFix) ![Lines of code](https://img.shields.io/tokei/lines/github/muhammedaksam/VikipediBot)
 
 </div>
 
 
-# wiki-reddit-bot
-**Public repo of  u/wikipedia_answer_bot**
+# VikipediBot
+**u/VikipediBot botu Public Repo**
 <br />
 
 

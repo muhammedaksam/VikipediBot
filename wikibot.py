@@ -5,21 +5,28 @@ import excluding_words as ew
 from mediawikiapi import MediaWikiAPI, MediaWikiAPIException as Exc, PageError
 from praw import Reddit, exceptions
 from tenacity import retry, wait_chain, wait_fixed
+from os import environ
+
+client_id = os.environ['REDDIT_CLIENT_ID']
+secret = os.environ['REDDIT_SECRET']
+password = os.environ['REDDIT_PW']
+username = os.environ['BOT_USERNAME']
 
 # These all are fake except for the username
-reddit = Reddit(client_id="id", client_secret="secret",
-                password="password",
-                user_agent="agent",
-                username="wikipedia_answer_bot")
+reddit = Reddit(client_id=client_id,
+                client_secret=secret,
+                password=password,
+                user_agent="VikipediBot - VikipediBot v 1.0.0 by u/XanelaOw",
+                username=username)
 
 subreddit = reddit.subreddit('all')
 
-never_reply = {"wikipedia_answer_bot", "AutoModerator"}
+never_reply = {username, "AutoModerator"}
 opted_out_users = set()
-OPT_OUT_MESSAGE = "wab opt out"  # wab stands for wikipedia answer bot
-OPT_IN_MESSAGE = "wab opt in"
+OPT_OUT_MESSAGE = "vpb opt out"  # wab stands for wikipedia answer bot
+OPT_IN_MESSAGE = "vpb opt in"
 
-DELETE_MESSAGE = "wab delete"
+DELETE_MESSAGE = "vpb delete"
 MIN_SCORE_TO_DELETE = -3
 
 
@@ -30,19 +37,19 @@ def opt_out_and_opt_in(comment):
     if text == OPT_OUT_MESSAGE:
         print('there')
         if username in opted_out_users:
-            comment.reply(f"You are already opted out, {username}")
+            comment.reply(f"Zaten listeden çıkarıldınız, {username}")
         else:
             opted_out_users.add(username)
             comment.reply(
-                f"You've been successfully opted out, {username}\n\n Write `wab opt in` if you want to opt in")
+                f"Başarıyla listeden çıkarıldınız, {username}\n\n Listeye tekrar girmek için `{OPT_IN_MESSAGE}` yazınız.")
             print(f'{username} opted out')
 
     elif text == OPT_IN_MESSAGE:
         if username not in opted_out_users:
-            comment.reply(f"You are already opted in, {username}")
+            comment.reply(f"Zaten listedesiniz, {username}")
         else:
             opted_out_users.remove(username)
-            comment.reply(f"You've been successfully opted in, {username}")
+            comment.reply(f"Başarıyla listeye girdiniz, {username}")
             print(f'{username} opted in')
 
             
@@ -94,7 +101,7 @@ def make_page_and_reply(text, comment, auto_s=False):
                     reply = s.few_meanings_reply(text)
 
                 # Replying to a comment
-                comment.reply(f"**{reply}**\n\nMore details here: "
+                comment.reply(f"**{reply}**\n\nDaha fazla ayrıntı için: "
                               f"<{pg.url}> {s.comment_reply}{s.festivity_reply()}")
 
                 print(f"Reply Success: {pg.title}")
