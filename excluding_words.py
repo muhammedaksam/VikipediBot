@@ -21,7 +21,7 @@ excluding_words2 = {
 
 quotes = ('"', "“")
 
-to_replace1 = ('what does ', 'mean', 'even ')
+to_replace1 = (" nedir", " ne demektir", " ne demek"," nelerdir", " kimdir", " kim", " kimlerdir", " kimler")
 to_replace2 = (" an ", " a ")
 
 link_only = ("may refer to", "can refer to", "may stand for", "refers to", "refer to", "can mean")

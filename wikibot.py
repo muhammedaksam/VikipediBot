@@ -40,19 +40,19 @@ def opt_out_and_opt_in(comment):
     if text == OPT_OUT_MESSAGE:
         print('there')
         if username in opted_out_users:
-            comment.reply(f"Zaten listeden çıkarıldınız, {username}")
+            comment.reply(body=f"Zaten listeden çıkarıldınız, {username}")
         else:
             opted_out_users.add(username)
-            comment.reply(
+            comment.reply(body=
                 f"Başarıyla listeden çıkarıldınız, {username}\n\n Listeye tekrar girmek için `{OPT_IN_MESSAGE}` yazınız.")
             print(f'{username} opted out')
 
     elif text == OPT_IN_MESSAGE:
         if username not in opted_out_users:
-            comment.reply(f"Zaten listedesiniz, {username}")
+            comment.reply(body=f"Zaten listedesiniz, {username}")
         else:
             opted_out_users.remove(username)
-            comment.reply(f"Başarıyla listeye girdiniz, {username}")
+            comment.reply(body=f"Başarıyla listeye girdiniz, {username}")
             print(f'{username} opted in')
 
             
@@ -104,7 +104,7 @@ def make_page_and_reply(text, comment, auto_s=False):
                     reply = s.few_meanings_reply(text)
 
                 # Replying to a comment
-                comment.reply(f"**{reply}**\n\nDaha fazla ayrıntı için: "
+                comment.reply(body=f"**{reply}**\n\nDaha fazla ayrıntı için: "
                               f"<{pg.url}> {s.comment_reply}{s.festivity_reply()}")
 
                 print(f"Reply Success: {pg.title}")
@@ -122,7 +122,7 @@ def send(text, comment):
     memes = tf.get_meme(text.strip())
 
     if memes:
-        comment.reply(f"{memes}\n\n{s.comment_reply}{s.festivity_reply()}")
+        comment.reply(body=f"{memes}\n\n{s.comment_reply}{s.festivity_reply()}")
 
     # No replies to short and long searches
     elif length <= 3 and len(text) >= 3:
@@ -160,7 +160,7 @@ def check_and_send(comment):
 
             # Resetting valid_question's value to check the second pattern
             else:
-                verb = (' kim' in i or ' kimdir' in i) and ('ar?' or 'er?' or 'ır?' or 'ir?' or 'ur?' or 'ür?' or 'or?' or 'ör?') in i
+                verb = (' kimdir' in i) and ('ar?' or 'er?' or 'ır?' or 'ir?' or 'ur?' or 'ür?' or 'or?' or 'ör?') in i
                 valid_pattern = tf.pattern2(i)
 
                 # Checking pattern 2: What/who is/are X?

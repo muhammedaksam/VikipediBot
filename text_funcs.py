@@ -70,7 +70,7 @@ def check_question(question: str, excluding_words: tuple) -> bool:
 
 
 #check_words = ["what is ", "what's ", "who is ", "who's ", "who are ", "what are "] for reference
-check_words = [" nelerdir", " kim", " kimdir", " kimler", " kimlerdir"]
+check_words = [" ne demektir", " ne demek"," nelerdir", " kimdir", " kim", " kimlerdir", " kimler"]
 
 
 def pattern2(text):
