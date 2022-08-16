@@ -152,7 +152,7 @@ def check_and_send(comment):
                 print('pattern1')
 
                 # Slicing the sentence so only the question remains
-                i = i[i.index(' nedir'):]
+                #i = i[i.index(' nedir'):]
 
                 # Removing everything except for the word to search for
                 i = tf.remove_all(i, ew.to_replace1)
