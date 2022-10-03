@@ -26,10 +26,10 @@ subreddit = reddit.subreddit('all')
 
 never_reply = {username, "AutoModerator"}
 opted_out_users = set()
-OPT_OUT_MESSAGE = "vpb opt out"  # wab stands for wikipedia answer bot
-OPT_IN_MESSAGE = "vpb opt in"
+OPT_OUT_MESSAGE = "wab opt out"  # wab stands for wikipedia answer bot
+OPT_IN_MESSAGE = "wab opt in"
 
-DELETE_MESSAGE = "vpb delete"
+DELETE_MESSAGE = "wab delete"
 MIN_SCORE_TO_DELETE = -3
 
 
@@ -40,19 +40,19 @@ def opt_out_and_opt_in(comment):
     if text == OPT_OUT_MESSAGE:
         print('there')
         if username in opted_out_users:
-            comment.reply(body=f"Zaten listeden çıkarıldınız, {username}")
+            comment.reply(body=f"You are already opted out, {username}")
         else:
             opted_out_users.add(username)
-            comment.reply(body=
-                f"Başarıyla listeden çıkarıldınız, {username}\n\n Listeye tekrar girmek için `{OPT_IN_MESSAGE}` yazınız.")
+            comment.reply(
+                f"You've been successfully opted out, {username}\n\n Write `wab opt in` if you want to opt in")
             print(f'{username} opted out')
 
     elif text == OPT_IN_MESSAGE:
         if username not in opted_out_users:
-            comment.reply(body=f"Zaten listedesiniz, {username}")
+            comment.reply(body=f"You are already opted in, {username}")
         else:
             opted_out_users.remove(username)
-            comment.reply(body=f"Başarıyla listeye girdiniz, {username}")
+            comment.reply(body=f"You've been successfully opted in, {username}")
             print(f'{username} opted in')
 
             
@@ -104,7 +104,7 @@ def make_page_and_reply(text, comment, auto_s=False):
                     reply = s.few_meanings_reply(text)
 
                 # Replying to a comment
-                comment.reply(body=f"**{reply}**\n\nDaha fazla ayrıntı için: "
+                comment.reply(body=f"**{reply}**\n\nMore details here: "
                               f"<{pg.url}> {s.comment_reply}{s.festivity_reply()}")
 
                 print(f"Reply Success: {pg.title}")
@@ -148,11 +148,11 @@ def check_and_send(comment):
                 i = i[i.rfind('.') + 1:]
 
             # Checking pattern 1: What does X mean?
-            if ' nedir' in i:
+            if 'what does ' in i and ' mean' in i:
                 print('pattern1')
 
                 # Slicing the sentence so only the question remains
-                #i = i[i.index(' nedir'):]
+                i = i[i.index('what does '):]
 
                 # Removing everything except for the word to search for
                 i = tf.remove_all(i, ew.to_replace1)
@@ -160,7 +160,7 @@ def check_and_send(comment):
 
             # Resetting valid_question's value to check the second pattern
             else:
-                verb = (' kimdir' in i) and ('ar?' or 'er?' or 'ır?' or 'ir?' or 'ur?' or 'ür?' or 'or?' or 'ör?') in i
+                verb = ('who\'s ' in i or 'who is ' in i) and 'ing ' in i
                 valid_pattern = tf.pattern2(i)
 
                 # Checking pattern 2: What/who is/are X?

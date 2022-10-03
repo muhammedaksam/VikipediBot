@@ -69,8 +69,7 @@ def check_question(question: str, excluding_words: tuple) -> bool:
 #     return False
 
 
-#check_words = ["what is ", "what's ", "who is ", "who's ", "who are ", "what are "] for reference
-check_words = [" ne demektir", " ne demek"," nelerdir", " kimdir", " kim", " kimlerdir", " kimler", " ne zaman", " neden", " nasıl", " nerede"]
+check_words = ["what is ", "what's ", "who is ", "who's ", "who are ", "what are "]
 
 
 def pattern2(text):
@@ -82,8 +81,6 @@ def pattern2(text):
 
 
 memes = {
-    "Sen kimsin?": "Ben bir botum.",
-    "cu": "ananın amcu",
     "joe": "Joe Mama :D",
     "candice": "Candice dick fit in your mouth?",
     "ligma": "Ligma balls :D",
